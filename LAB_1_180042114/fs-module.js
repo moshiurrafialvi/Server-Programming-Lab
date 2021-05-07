@@ -25,7 +25,7 @@ fs.appendFileSync("./contents/demofile.txt", "We are learning JS");
 
  console.log("before"); */
 
- s.readFile("contents/renamefile.txt","utf-8",(err,data)=>{
+ fs.readFile("contents/renamefile.txt","utf-8",(err,data)=>{
     if(err){
         console.log(err);
     } else {
@@ -49,9 +49,9 @@ fs.appendFileSync("./contents/demofile.txt", "We are learning JS");
                 }
             })
     }
-})
+});
 
-console.log('After') 
+console.log('After') ;
 
 
 
