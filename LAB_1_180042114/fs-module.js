@@ -27,14 +27,14 @@ fs.appendFileSync("./contents/demofile.txt", "We are learning JS");
 
  s.readFile("contents/renamefile.txt","utf-8",(err,data)=>{
     if(err){
-        console.log(err)
+        console.log(err);
     } else {
         fs.appendFile(
             'contents/renamefile.txt', 
             'Is this a synchronus process?',
                 (err) =>{
                     if(err){
-                        console.log(err)
+                        console.log(err);
                     }
                 }
             )
@@ -42,10 +42,10 @@ fs.appendFileSync("./contents/demofile.txt", "We are learning JS");
         fs.readFile(
             "contents/renamefile.txt","utf-8",(err,data)=>{
                 if(err){
-                    console.log(err)
+                    console.log(err);
                 }
                 else {
-                    console.log(data)
+                    console.log(data);
                 }
             })
     }
