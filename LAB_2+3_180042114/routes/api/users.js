@@ -4,6 +4,8 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
 //api/users
 //Register a User
@@ -17,7 +19,7 @@ router.post(
   ).isLength({ min: 6 }),
   check("repassword", "Password doesn't match'")
     .isLength({ min: 6 })
-    .custom((value, { req, loc, path }) => {
+    .custom((value, { req }) => {
       if (value !== req.body.password) {
         // trow error if passwords do not match
         throw new Error("Passwords don't match");
@@ -55,7 +57,23 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
       await user.save();
 
-      res.send("User registered");
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+
+      jwt.sign(
+        payload,
+        config.get("jwtSecret"),
+        { expiresIn: "5 days" },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
+
+      //res.send("User registered");
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");

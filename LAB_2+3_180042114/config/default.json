@@ -1,3 +1,4 @@
 {
+  "jwtSecret": "myjwtSecret",
   "mongoURI": "mongodb+srv://alvi123:alvi123@labtask.wfjuw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
