@@ -7,7 +7,7 @@ connectDB(); //Connect db
 
 app.use(express.json({ extend: false }));
 
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 7500;
 
 app.get("/", (req, res) => {
   res.send("Running");
