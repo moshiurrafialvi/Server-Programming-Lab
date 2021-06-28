@@ -10,7 +10,7 @@ const config = require("config");
 //api/users
 //Register a User
 router.post(
-  "/",
+  "/api/users/register",
   check("name", "Name is required").notEmpty(),
   check("email", "Please include a valid email").isEmail(),
   check(
