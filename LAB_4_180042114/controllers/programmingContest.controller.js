@@ -17,4 +17,4 @@ const deletePC = (req, res) => {
   res.render("programming-contest/list.ejs");
 };
 
-module.exports = program{ getPC, postPC, getPClist, deletePC };
+module.exports = { getPC, postPC, getPClist, deletePC };
