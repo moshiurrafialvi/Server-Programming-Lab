@@ -1,11 +1,10 @@
 const MathOlympiad = require("../models/MathOlympiad.model");
 
 const getMO = (req, res) => {
-  res.render("math-olympiad/register.ejs");
+  res.render("math-olympiad/register.ejs", { error: req.flash("error") });
 };
 
 const postMO = (req, res) => {
-  res.render("math-olympiad/list.ejs");
   const { name, category, contact, email, institution, tshirt } = req.body;
   console.log(name);
   console.log(category);
@@ -61,7 +60,6 @@ const postMO = (req, res) => {
     }
   });
 };
-
 const deleteMO = (req, res) => {
   const id = req.params.id;
   console.log(id);
