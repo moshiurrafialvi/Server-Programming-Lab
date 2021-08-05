@@ -8,7 +8,7 @@ const postPC = (req, res) => {
   res.render("programming-contest/register.ejs");
 };
 
-const getPClist = (req, res) => {
+const getPCList = (req, res) => {
   res.render("programming-contest/list.ejs");
 };
 const deletePC = (req, res) => {
@@ -17,4 +17,4 @@ const deletePC = (req, res) => {
   res.render("programming-contest/list.ejs");
 };
 
-module.exports = { getPC, postPC, getPClist, deletePC };
+module.exports = { getPC, postPC, getPCList, deletePC };
