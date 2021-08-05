@@ -29,6 +29,8 @@
           <div class="x_content">
             <br />
             <form
+              method="POST"
+              action="/MathOlympiad/register"
               id="demo-form2"
               data-parsley-validate
               class="form-horizontal form-label-left"
@@ -82,6 +84,24 @@
                   />
                 </div>
               </div>
+              <div class="item form-group">
+                <label
+                  class="col-form-label col-md-3 col-sm-3 label-align"
+                  for="first-name"
+                >
+                  Institution <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6">
+                  <input
+                    type="text"
+                    id="institution"
+                    name="institution"
+                    required="required"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+
               <div class="item form-group">
                 <label
                   class="col-form-label col-md-3 col-sm-3 label-align"
