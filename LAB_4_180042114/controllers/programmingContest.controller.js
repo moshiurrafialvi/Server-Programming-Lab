@@ -1,3 +1,5 @@
+const ProgrammingContest = require("../models/ProgrammingContest.model");
+
 const getPC = (req, res) => {
   res.render("programming-contest/register.ejs", { error: req.flash("error") });
 };
@@ -15,4 +17,4 @@ const deletePC = (req, res) => {
   res.render("programming-contest/list.ejs");
 };
 
-PCdule.exports = { getPC, postPC, getPClist, deletePC };
+module.exports = program{ getPC, postPC, getPClist, deletePC };
