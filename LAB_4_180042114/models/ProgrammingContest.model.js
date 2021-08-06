@@ -1,101 +1,96 @@
 const mongoose = require("mongoose");
 const PCSchema = new mongoose.Schema({
-  coach: {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-
-    phone: {
-      type: String,
-      required: true,
-    },
-
-    shirt: {
-      type: String,
-      required: true,
-    },
+  teamName: {
+    type: String,
+    required: true,
   },
-
-  teamLeader: {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-
-    phone: {
-      type: String,
-      required: true,
-    },
-
-    shirt: {
-      type: String,
-      required: true,
-    },
+  institute: {
+    type: String,
+    required: true,
   },
-
-  teamMember1: {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-
-    phone: {
-      type: String,
-      required: true,
-    },
-
-    shirt: {
-      type: String,
-      required: true,
-    },
+  total: {
+    type: Number,
+    required: true,
   },
-
-  teamMember2: {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-
-    phone: {
-      type: String,
-      required: true,
-    },
-
-    shirt: {
-      type: String,
-      required: true,
-    },
-  },
-
   paid: {
-    type: Boolean,
-    default: false,
+    type: Number,
+    required: true,
   },
   selected: {
     type: Boolean,
-    default: false,
+    required: true,
   },
-
   date: {
     type: Date,
     default: Date.now,
+  },
+
+  coachName: {
+    type: String,
+    required: true,
+  },
+  coachContact: {
+    type: String,
+    required: true,
+  },
+  coachEmail: {
+    type: String,
+    required: true,
+  },
+  coachTshirt: {
+    type: String,
+    required: true,
+  },
+
+  teamLeaderName: {
+    type: String,
+    required: true,
+  },
+  teamLeaderContact: {
+    type: String,
+    required: true,
+  },
+  teamLeaderEmail: {
+    type: String,
+    required: true,
+  },
+  teamLeadertshirt: {
+    type: String,
+    required: true,
+  },
+
+  teamMember1Name: {
+    type: String,
+    required: true,
+  },
+  teamMember1Contact: {
+    type: String,
+    required: true,
+  },
+  teamMember1Email: {
+    type: String,
+    required: true,
+  },
+  teamMember1tshirt: {
+    type: String,
+    required: true,
+  },
+
+  teamMember2Name: {
+    type: String,
+    required: true,
+  },
+  teamMember2Contact: {
+    type: String,
+    required: true,
+  },
+  teamMember2Email: {
+    type: String,
+    required: true,
+  },
+  teamMember2tshirt: {
+    type: String,
+    required: true,
   },
 });
 
