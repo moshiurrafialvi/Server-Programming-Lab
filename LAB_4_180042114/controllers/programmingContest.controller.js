@@ -173,6 +173,84 @@ const selectPC = (req, res) => {
       res.redirect("/ProgrammingContest/list");
     });
 };
+
+const getPCedit = (req, res) => {
+  ProgrammingContest.findOne({ _id: req.params.id })
+    .then((team) => {
+      if (!team) {
+        error = "Invalid Participant";
+        req.flash("error", error);
+        res.redirect("/ProgrammingContest/list");
+      } else {
+        res.render("programming-contest/edit.ejs", {
+          error: req.flash("error"),
+          team,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      error = "Data Retrieval Failed";
+      req.flash("error", error);
+      res.redirect("/ProgrammingContest/list");
+    });
+};
+
+const postPCedit = (req, res) => {
+  const {
+    teamName,
+    institution,
+    coachName,
+    coachEmail,
+    coachContact,
+    coachtshirt,
+    teamLeaderName,
+    teamLeaderEmail,
+    teamLeaderContact,
+    teamLeadertshirt,
+    teamMember1Name,
+    teamMember1Email,
+    teamMember1Contact,
+    teamMember1tshirt,
+    teamMember2Name,
+    teamMember2Email,
+    teamMember2Contact,
+    teamMember2tshirt,
+  } = req.body;
+  const filter = { _id: req.params.id };
+  ProgrammingContest.findOneAndUpdate(filter, {
+    $set: {
+      teamName,
+      institution,
+      coachName,
+      coachEmail,
+      coachContact,
+      coachtshirt,
+      teamLeaderName,
+      teamLeaderEmail,
+      teamLeaderContact,
+      teamLeadertshirt,
+      teamMember1Name,
+      teamMember1Email,
+      teamMember1Contact,
+      teamMember1tshirt,
+      teamMember2Name,
+      teamMember2Email,
+      teamMember2Contact,
+      teamMember2tshirt,
+    },
+  })
+    .then(() => {
+      let error = "Data has been edited successfully!";
+      req.flash("error", error);
+      res.redirect("/ProgrammingContest/list");
+    })
+    .catch(() => {
+      let error = "Failed to edit data";
+      req.flash("error", error);
+      res.redirect("/ProgrammingContest/list");
+    });
+};
 module.exports = {
   getPC,
   postPC,
@@ -180,4 +258,6 @@ module.exports = {
   deletePC,
   paymentDonePC,
   selectPC,
+  postPCedit,
+  getPCedit,
 };
