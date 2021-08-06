@@ -107,9 +107,44 @@ const getPCList = (req, res) => {
     });
 };
 const deletePC = (req, res) => {
-  const id = req.params.id;
-  console.log(id);
-  res.render("programming-contest/list.ejs");
+  let error = "";
+
+  ProgrammingContest.deleteOne({ _id: req.params.id })
+    .then(() => {
+      let error = "Data has been deleted successfully!";
+      req.flash("error", error);
+      res.redirect("/ProgrammingContest/list");
+    })
+    .catch(() => {
+      let error = "Failed to delete data";
+      req.flash("error", error);
+      res.redirect("/ProgrammingContest/list");
+    });
 };
 
-module.exports = { getPC, postPC, getPCList, deletePC };
+const paymentDonePC = (req, res) => {
+  const id = req.params.id;
+
+  ProgrammingContest.findOne({ _id: id })
+    .then((team) => {
+      team.paid = team.total;
+      team
+        .save()
+        .then(() => {
+          let error = "Payment completed successfully!";
+          req.flash("error", error);
+          res.redirect("/ProgrammingContest/list");
+        })
+        .catch(() => {
+          let error = "Data could not be updated!";
+          req.flash("error", error);
+          res.redirect("/ProgrammingContest/list");
+        });
+    })
+    .catch(() => {
+      let error = "Data could not be updated!";
+      req.flash("error", error);
+      res.redirect("/ProgrammingContest/list");
+    });
+};
+module.exports = { getPC, postPC, getPCList, deletePC, paymentDonePC };
