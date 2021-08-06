@@ -4,7 +4,7 @@ const PCSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  institute: {
+  institution: {
     type: String,
     required: true,
   },
@@ -37,7 +37,7 @@ const PCSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  coachTshirt: {
+  coachtshirt: {
     type: String,
     required: true,
   },

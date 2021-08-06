@@ -11,79 +11,80 @@ const getPC = (req, res) => {
 const postPC = (req, res) => {
   const {
     teamName,
-    institute,
+    institution,
     coachName,
-    coachContact,
     coachEmail,
-    coachTshirt,
-    TLName,
-    TLContact,
-    TLEmail,
-    TLtshirt,
-    TM1Name,
-    TM1Contact,
-    TM1Email,
-    TM1tshirt,
-    TM2Name,
-    TM2Contact,
-    TM2Email,
-    TM2tshirt,
+    coachContact,
+    coachtshirt,
+    teamLeaderName,
+    teamLeaderEmail,
+    teamLeaderContact,
+    teamLeadertshirt,
+    teamMember1Name,
+    teamMember1Email,
+    teamMember1Contact,
+    teamMember1tshirt,
+    teamMember2Name,
+    teamMember2Email,
+    teamMember2Contact,
+    teamMember2tshirt,
   } = req.body;
-  console.log(institute);
 
   const total = 1500;
   const paid = 0;
   const selected = false;
   let error = "";
 
-  ProgrammingContest.findOne({ teamName: teamName, institute: institute }).then(
-    (team) => {
-      if (team) {
-        error = "Team with same name and institution exists";
-        req.flash("error", error);
-        res.redirect("/ProgrammingContest/register");
-      } else {
-        const participant = newProgrammingContest({
-          teamName,
-          institute,
-          coachName,
-          coachContact,
-          coachEmail,
-          coachTshirt,
-          TLName,
-          TLContact,
-          TLEmail,
-          TLtshirt,
-          TM1Name,
-          TM1Contact,
-          TM1Email,
-          TM1tshirt,
-          TM2Name,
-          TM2Contact,
-          TM2Email,
-          TM2tshirt,
-          total,
-          paid,
-          selected,
+  ProgrammingContest.findOne({
+    teamName: teamName,
+    institution: institution,
+  }).then((team) => {
+    if (team) {
+      error = "Team with this team name and institution already exists!";
+      console.log(error);
+      req.flash("error", error);
+      res.redirect("/ProgrammingContest/register");
+    } else {
+      const team = new ProgrammingContest({
+        teamName,
+        institution,
+        coachName,
+        coachEmail,
+        coachContact,
+        coachtshirt,
+        teamLeaderName,
+        teamLeaderEmail,
+        teamLeaderContact,
+        teamLeadertshirt,
+        teamMember1Name,
+        teamMember1Email,
+        teamMember1Contact,
+        teamMember1tshirt,
+        teamMember2Name,
+        teamMember2Email,
+        teamMember2Contact,
+        teamMember2tshirt,
+        total,
+        paid,
+        selected,
+      });
+      team
+        .save()
+        .then(() => {
+          error = "Team has been registered successfully!";
+          console.log(error);
+          req.flash("error", error);
+          res.redirect("/ProgrammingContest/register");
+        })
+        .catch((err) => {
+          error = "An unexpected error occured while registering team";
+          console.log(error);
+          console.log(err);
+          req.flash("error", error);
+          res.redirect("/ProgrammingContest/register");
         });
-        participant
-          .save()
-          .then(() => {
-            error =
-              "Team for Programming Contest has been registered successfully!!";
-            console.log("save ", error);
-            req.flash("error", error);
-            res.redirect("/ProgrammingContest/register");
-          })
-          .catch(() => {
-            error = "Unexpected error";
-            console.log("error ", error);
-            req.flash("error", error);
-            res.redirect("/ProgrammingContest/register");
-          });
-      }
     }
-  );
+  });
 };
 
 const getPCList = (req, res) => {
