@@ -88,7 +88,23 @@ const postPC = (req, res) => {
 };
 
 const getPCList = (req, res) => {
-  res.render("programming-contest/list.ejs");
+  let all_team = [];
+  let error = "";
+  ProgrammingContest.find()
+    .then((data) => {
+      all_team = data;
+      res.render("programming-contest/list.ejs", {
+        error: req.flash("error"),
+        teams: all_team,
+      });
+    })
+    .catch(() => {
+      error = "Failed to retrieve data!";
+      res.render("programminh-contest/list.ejs", {
+        error: req.flash("error", error),
+        teams: all_team,
+      });
+    });
 };
 const deletePC = (req, res) => {
   const id = req.params.id;
