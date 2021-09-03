@@ -1,4 +1,6 @@
 const ProgrammingContest = require("../models/ProgrammingContest.model");
+const generateKey=require("../utility/key-generator");
+const mailer=require("../utility/mail-sender");
 
 const getPC = (req, res) => {
   res.render("programming-contest/register.ejs", { error: req.flash("error") });
@@ -28,9 +30,10 @@ const postPC = (req, res) => {
     teamMember2Email,
     teamMember2Contact,
     teamMember2tshirt,
+  
   } = req.body;
 
-  const total = 1500;
+  const total = 2500;
   const paid = 0;
   const selected = false;
   let error = "";
@@ -45,6 +48,7 @@ const postPC = (req, res) => {
       req.flash("error", error);
       res.redirect("/ProgrammingContest/register");
     } else {
+      const key= generateKey()
       const team = new ProgrammingContest({
         teamName,
         institution,
@@ -67,10 +71,15 @@ const postPC = (req, res) => {
         total,
         paid,
         selected,
+        key,
       });
       team
         .save()
         .then(() => {
+          mailer(coachEmail, 'Programming Contest', key, coachName)
+                    mailer(teamLeaderEmail, 'Programming Contest', key, teamLeaderName)
+                    mailer(teamMember1Email, 'Programming Contest', key, teamMember1Name)
+                    mailer(teamMember2Email, 'Programming Contest', key, teamMember2Name)
           error = "Team has been registered successfully!";
           console.log(error);
           req.flash("error", error);

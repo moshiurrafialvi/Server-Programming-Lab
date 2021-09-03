@@ -40,6 +40,11 @@ const MOSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  key:{
+    type: String,
+    required: true,
+
+  },
 });
 
 const MathOlympiad = mongoose.model("MathOlympiad", MOSchema);
